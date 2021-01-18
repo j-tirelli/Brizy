@@ -16,14 +16,25 @@ class Brizy_Content_ContextFactory {
 	 *
 	 * @return Brizy_Content_Context
 	 */
-	static public function createContext( $project, $brizy_post, $wp_post, $contentHtml, $isLoop = false ) {
-		$context = self::getContext( $project, $wp_post );
+	static public function createContext( $project, $brizy_post, $wp_post, $contentHtml, $parentContext = false ) {
+		$context = new Brizy_Content_Context( $project, null, $wp_post, null, $parentContext );
 
-		if ( $isLoop ) {
-			return apply_filters( 'brizy_loop_context_create', $context, $wp_post );
+		if ( $wp_post ) {
+			$context->setAuthor( $wp_post->post_author );
 		}
 
-		return apply_filters( 'brizy_context_create', $context, $wp_post );
+		return apply_filters( 'brizy_context_create', $context );
+	}
+
+	/**
+	 * @param $parentContext
+	 * @param $filterGroup
+	 *
+	 * @return Brizy_Content_FilterContext
+	 */
+	static public function createFilterContext( $parentContext, $option, $index, $filterGroup ) {
+		$context = new Brizy_Content_FilterContext( $parentContext,$option,$index,  $filterGroup );
+		return apply_filters( 'brizy_filter_context_create', $context);
 	}
 
 	static public function createEmptyContext() {
