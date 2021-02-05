@@ -21,8 +21,7 @@ import {
   IS_STORY,
   IS_INTERNAL_STORY,
   IS_EXTERNAL_STORY,
-  isGlobalPopup,
-  IS_WP
+  isGlobalPopup
 } from "./modes";
 import { setOffsetsToElementFromWrapper } from "./setDataInElement";
 
@@ -49,7 +48,6 @@ export {
   setOffsetsToElementFromWrapper,
   mapModels,
   isModel,
-  IS_WP,
   IS_PAGE,
   IS_TEMPLATE,
   IS_INTERNAL_POPUP,
